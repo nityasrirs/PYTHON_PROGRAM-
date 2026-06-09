@@ -1,0 +1,50 @@
+179:
+from functools import cmp_to_key
+
+class Solution:
+    def largestNumber(self, nums: List[int]) -> str:
+        nums = sorted(map(str, nums), key=cmp_to_key(lambda a, b: (b+a > a+b) - (b+a < a+b)))
+        return str(int(''.join(nums)))
+
+290:
+class Solution:
+    def wordPattern(self, pattern: str, s: str) -> bool:
+        words = s.split()
+        return len(pattern) == len(words) and len(set(zip(pattern, words))) == len(set(pattern)) == len(set(words))
+
+383:
+from collections import Counter
+
+class Solution:
+    def canConstruct(self, ransomNote: str, magazine: str) -> bool:
+        return Counter(ransomNote) <= Counter(magazine)
+
+
+387:
+from collections import Counter
+
+class Solution:
+    def firstUniqChar(self, s: str) -> int:
+        count = Counter(s)
+        for i, ch in enumerate(s):
+            if count[ch] == 1:
+                return i
+        return -1
+
+405:
+class Solution:
+    def toHex(self, num: int) -> str:
+        if num == 0:
+            return "0"
+
+        if num < 0:
+            num += 2 ** 32
+
+        hex_chars = "0123456789abcdef"
+        res = ""
+
+        while num:
+            res = hex_chars[num % 16] + res
+            num //= 16
+
+        return res
